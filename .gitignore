@@ -1,0 +1,10 @@
+/.vagrant
+
+# Development Stuff
+*.sublime*
+*~
+*.sql
+
+# OS Stuff
+.DS_Store
+thumbs.db

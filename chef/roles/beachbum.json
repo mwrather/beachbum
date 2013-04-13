@@ -1,0 +1,28 @@
+{
+  "name": "beachbum",
+  "chef_type": "role",
+  "json_class": "Chef::Role",
+  "description": "LAMP Server for Drupal Development.",
+  "run_list": [
+    "recipe[apt]",
+    "recipe[apache2]",
+    "recipe[php]",
+    "recipe[apache2::mod_php5]",
+    "recipe[apache2::mod_rewrite]",
+    "recipe[apache2::mod_headers]",
+    "recipe[apache2::mod_expires]",
+    "recipe[openssl]",
+    "recipe[mysql::server]",
+    "recipe[build-essential]",
+    "recipe[setup]"
+  ],
+  "override_attributes": {
+    "mysql": {
+      "server_root_password": "root",
+      "server_debian_password": "root",
+      "server_repl_password": "root"
+    },
+    "hostname": "beachbum.local",
+    "set_env": "dev"
+  }
+}
