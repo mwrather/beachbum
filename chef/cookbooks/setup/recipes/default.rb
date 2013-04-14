@@ -23,17 +23,6 @@ end
 #   notifies :restart, resources("service[apache2]"), :delayed
 # end
 
-# php apt packages
-package "php5-mysql" do
-  action :install
-  notifies :restart, resources("service[apache2]"), :delayed
-end
-
-package "php5-gd" do
-  action :install
-  notifies :restart, resources("service[apache2]"), :delayed
-end
-
 # disable default apache site
 execute "disable-default-site" do
   command "sudo a2dissite default"
