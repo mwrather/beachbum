@@ -19,14 +19,29 @@ Vagrant.configure("2") do |config|
   # Provision with chef solo
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "chef/cookbooks"
-    chef.roles_path = "chef/roles"
-    # chef.data_bags_path = "chef/data_bags"
 
-    # Add Recipes and Roles (we're adding recipes in the role definition)
-    # chef.add_recipe "mysql"
-    chef.add_role("beachbum")
+    chef.add_recipe "apt"
+    chef.add_recipe "apache2"
+    chef.add_recipe "php"
+    chef.add_recipe "php::module_mysql"
+    chef.add_recipe "php::module_gd"
+    chef.add_recipe "apache2::mod_php5"
+    chef.add_recipe "apache2::mod_rewrite"
+    chef.add_recipe "apache2::mod_headers"
+    chef.add_recipe "apache2::mod_expires"
+    chef.add_recipe "openssl"
+    chef.add_recipe "mysql::server"
+    chef.add_recipe "build-essential"
+    chef.add_recipe "setup"
 
-    # You can specify JSON attributes here or in the role definition.
-    # chef.json = { :mysql_password => "foo" }
+    chef.json = {
+      "mysql" => {
+        "server_root_password" => "root",
+        "server_debian_password" => "root",
+        "server_repl_password" => "root"
+      },
+      "hostname" => "beachbum.local",
+      "set_env" => "dev"
+    }
   end
 end
