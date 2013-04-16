@@ -1,0 +1,7 @@
+cookbook "apt"
+cookbook "apache2"
+cookbook "php"
+cookbook "openssl"
+cookbook "mysql"
+cookbook "build-essential"
+cookbook "beachbum-bonfire", github: "mwrather/beachbum-bonfire"

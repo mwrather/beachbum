@@ -16,10 +16,12 @@ Vagrant.configure("2") do |config|
   # Share additional folders
   # config.vm.synced_folder "../data", "/vagrant_data"
 
+  # We are using Chef Solo with Berkshelf http://berkshelf.com/
+  # Install berkshelf with `vagrant plugin install berkshelf-vagrant`
+  config.berkshelf.enabled = true
+
   # Provision with chef solo
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "chef/cookbooks"
-
     chef.add_recipe "apt"
     chef.add_recipe "apache2"
     chef.add_recipe "php"
@@ -32,7 +34,7 @@ Vagrant.configure("2") do |config|
     chef.add_recipe "openssl"
     chef.add_recipe "mysql::server"
     chef.add_recipe "build-essential"
-    chef.add_recipe "setup"
+    chef.add_recipe "beachbum-bonfire"
 
     chef.json = {
       "mysql" => {
