@@ -12,9 +12,17 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access at this IP
   config.vm.network :private_network, ip: "192.168.33.10"
+  config.ssh.forward_agent = true
 
-  # Share additional folders
-  # config.vm.synced_folder "../data", "/vagrant_data"
+  # Set some Virtualbox settings
+  config.vm.provider :virtualbox do |v|
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--memory", 2048]
+    v.customize ["modifyvm", :id, "--name", "beachbum"]
+  end
+
+  # Sync the www folder with NFS
+  config.vm.synced_folder "./www", "/var/www", id: "vagrant-root" , :nfs => true
 
   # We are using Chef Solo with Berkshelf http://berkshelf.com/
   # Install berkshelf with `vagrant plugin install berkshelf-vagrant`
