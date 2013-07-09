@@ -11,7 +11,8 @@ Vagrant.configure("2") do |config|
   config.vm.network :forwarded_port, guest: 80, host: 8080
 
   # Create a private network, which allows host-only access at this IP
-  config.vm.network :private_network, ip: "192.168.33.10"
+  # 232.24 is BEA.CH on a phone keypad
+  config.vm.network :private_network, ip: "192.168.232.24"
   config.ssh.forward_agent = true
 
   # Set some Virtualbox settings
